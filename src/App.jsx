@@ -7,8 +7,10 @@ import Tour from './components/Tour';
 import Footer from './components/Footer';
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
-import { CartProvider } from './components/CartContext';
 import CartOverlay from './components/CartOverlay';
+import { CartProvider } from './components/CartContext';
+
+import AdminDashboard from './components/Admin/AdminDashboard';
 
 function Home() {
   return (
@@ -53,6 +55,7 @@ function AppContent() {
           <Route path="/tour" element={<TourPage />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </>
       <CartOverlay />

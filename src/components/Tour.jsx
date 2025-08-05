@@ -1,33 +1,23 @@
-import React from 'react';
+function getEvents() {
+  const data = localStorage.getItem("tourEvents");
+  if (data) return JSON.parse(data);
+  return [
+    { date: 'Aug 15, 2025', city: 'Berlin', venue: 'Velodrom', link: '#' },
+    { date: 'Sep 2, 2025', city: 'London', venue: 'O2 Arena', link: '#' },
+    { date: 'Sep 18, 2025', city: 'Paris', venue: 'Accor Arena', link: '#' },
+    { date: 'Oct 5, 2025', city: 'New York', venue: 'Madison Square Garden', link: '#' }
+  ];
+}
 
-const events = [
-  {
-    date: 'Aug 15, 2025',
-    city: 'Berlin',
-    venue: 'Velodrom',
-    link: '#'
-  },
-  {
-    date: 'Sep 2, 2025',
-    city: 'London',
-    venue: 'O2 Arena',
-    link: '#'
-  },
-  {
-    date: 'Sep 18, 2025',
-    city: 'Paris',
-    venue: 'Accor Arena',
-    link: '#'
-  },
-  {
-    date: 'Oct 5, 2025',
-    city: 'New York',
-    venue: 'Madison Square Garden',
-    link: '#'
-  }
-];
+import React, { useState, useEffect } from 'react';
 
 export default function Tour() {
+  const [events, setEvents] = useState(getEvents());
+  useEffect(() => {
+    function handleStorage() { setEvents(getEvents()); }
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
   return (
     <main>
       <h1 style={{ textAlign: 'center', marginTop: 40 }}>TOUR</h1>

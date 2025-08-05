@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import products from './productsData';
+import productsData from './productsData';
+
+function getProducts() {
+  const data = localStorage.getItem("shopProducts");
+  if (data) return JSON.parse(data);
+  return productsData;
+}
+
 export default function ProductGrid() {
+  const [products, setProducts] = useState(getProducts());
+  useEffect(() => {
+    function handleStorage() { setProducts(getProducts()); }
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
   return (
     <div className="product-grid" id="productGrid">
       {products.map((product, idx) => (
