@@ -17,18 +17,39 @@ function setStoredProducts(products) {
 export default function ManageProducts() {
   const [products, setProducts] = useState(getStoredProducts());
   const [form, setForm] = useState({ title: "", price: "", img: "" });
+  const [imgFile, setImgFile] = useState(null);
 
   useEffect(() => { setStoredProducts(products); }, [products]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
+  function handleFileChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setForm(f => ({ ...f, img: reader.result }));
+        setImgFile(file);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setForm(f => ({ ...f, img: "" }));
+      setImgFile(null);
+    }
+  }
+
   function handleAdd(e) {
     e.preventDefault();
     if (!form.title || !form.price || !form.img) return;
     setProducts([...products, form]);
     setForm({ title: "", price: "", img: "" });
+    setImgFile(null);
+    // Optionally reset file input
+    if (e.target && e.target.reset) e.target.reset();
   }
+
   function handleDelete(idx) {
     setProducts(products.filter((_, i) => i !== idx));
   }
@@ -39,7 +60,7 @@ export default function ManageProducts() {
       <form onSubmit={handleAdd} style={{ display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
         <input name="title" value={form.title} onChange={handleChange} placeholder="Title" style={{ flex: 1, minWidth: 100 }} />
         <input name="price" value={form.price} onChange={handleChange} placeholder="Price (e.g. $19.99)" style={{ flex: 1, minWidth: 100 }} />
-        <input name="img" value={form.img} onChange={handleChange} placeholder="Image URL" style={{ flex: 2, minWidth: 120 }} />
+        <input type="file" accept="image/*" onChange={handleFileChange} style={{ flex: 2, minWidth: 120 }} />
         <button type="submit" style={{ background: '#fff', color: '#000', border: 'none', borderRadius: 6, padding: '8px 16px', fontWeight: 700 }}>Add</button>
       </form>
       <ul style={{ listStyle: "none", padding: 0 }}>
