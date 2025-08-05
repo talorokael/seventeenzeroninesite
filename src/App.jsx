@@ -1,10 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import OverlayNav from './components/OverlayNav';
 import Header from './components/Header';
 import ProductGrid from './components/ProductGrid';
-
-
+import Tour from './components/Tour';
+import Footer from './components/Footer';
+import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
+import { CartProvider } from './components/CartContext';
+import CartOverlay from './components/CartOverlay';
 
 function Home() {
   return (
@@ -19,19 +23,47 @@ function Shop() {
     <main>
       <h1 style={{ textAlign: 'center', marginTop: 40 }}>Shop</h1>
       <ProductGrid />
+      <Footer />
     </main>
+  );
+}
+
+function TourPage(){
+  return(
+    <main>
+      <Tour />
+    </main>
+  )
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isProductPage = location.pathname.startsWith("/product");
+  const isShopPage = location.pathname === "/shop";
+  const isCheckoutPage = location.pathname === "/checkout";
+
+  return (
+    <CartProvider>
+      <>
+        {!isProductPage && !isShopPage && !isCheckoutPage && <OverlayNav />}
+        {!isProductPage && !isCheckoutPage && <Header />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/tour" element={<TourPage />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Routes>
+      </>
+      <CartOverlay />
+    </CartProvider>
   );
 }
 
 export default function App() {
   return (
     <Router>
-      <OverlayNav />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-      </Routes>
+      <AppContent />
     </Router>
   );
 }
