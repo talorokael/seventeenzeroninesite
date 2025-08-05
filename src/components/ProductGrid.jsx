@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import productsData from './productsData';
 
 function getProducts() {
   const data = localStorage.getItem("shopProducts");
-  if (data) return JSON.parse(data);
-  return productsData;
+  return data ? JSON.parse(data) : [];
 }
 
 export default function ProductGrid() {
@@ -15,10 +13,13 @@ export default function ProductGrid() {
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
   }, []);
+  if (products.length === 0) {
+    return <div style={{textAlign: 'center', marginTop: 40, color: '#ccc'}}>No products available. Please add products in the admin panel.</div>;
+  }
   return (
     <div className="product-grid" id="productGrid">
-      {products.map((product, idx) => (
-        <Link to={`/product/${idx}`} key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {products.map((product) => (
+        <Link to={`/product/${product.id}`} key={product.id} style={{ textDecoration: 'none', color: 'inherit' }}>
           <div className="product-card">
             <img src={product.img} alt={product.title} />
             <div className="overlay-content">

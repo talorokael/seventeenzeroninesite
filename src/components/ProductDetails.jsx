@@ -1,11 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "./CartContext";
-import products from "./productsData";
+
+function getProducts() {
+  const data = localStorage.getItem("shopProducts");
+  return data ? JSON.parse(data) : [];
+}
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const product = products[parseInt(id, 10)];
+  const products = getProducts();
+  const product = products.find(p => p.id === id);
   const { addToCart } = useCart();
 
   if (!product) return <div>Product not found.</div>;

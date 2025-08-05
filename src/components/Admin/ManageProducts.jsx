@@ -3,12 +3,7 @@ import React, { useState, useEffect } from "react";
 // Utility: get/set products from localStorage
 function getStoredProducts() {
   const data = localStorage.getItem("shopProducts");
-  if (data) return JSON.parse(data);
-  // Default products (can be replaced by backend fetch)
-  return [
-    { title: "Vinyl Record", price: "$29.99", img: "https://via.placeholder.com/100" },
-    { title: "Cassette Tape", price: "$14.99", img: "https://via.placeholder.com/100" }
-  ];
+  return data ? JSON.parse(data) : [];
 }
 function setStoredProducts(products) {
   localStorage.setItem("shopProducts", JSON.stringify(products));
@@ -43,7 +38,8 @@ export default function ManageProducts() {
   function handleAdd(e) {
     e.preventDefault();
     if (!form.title || !form.price || !form.img) return;
-    setProducts([...products, form]);
+    const newProduct = { ...form, id: Date.now().toString() };
+    setProducts([...products, newProduct]);
     setForm({ title: "", price: "", img: "" });
     setImgFile(null);
     // Optionally reset file input
