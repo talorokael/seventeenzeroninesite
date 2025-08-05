@@ -67,7 +67,7 @@ export default function OverlayNav() {
         <img src="/utopia-logo.svg" alt="Utopia Logo" className="logo-animate" />
         <div className="links">
           <a href="/tour/" className="link-item">TOUR</a>
-          <a href="/utopia-world/" className="link-item">Department of Street Affairs</a>
+          <a href="/department" className="link-item">Department of Street Affairs</a>
           <a href="/shop" className="link-item">Store</a>
           <a href="/explore/" className="link-item">Activist Mix Tape</a>
         </div>

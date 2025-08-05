@@ -51,7 +51,18 @@ export default function ManageEvents() {
             <span style={{ flex: 1 }}>{event.date}</span>
             <span style={{ flex: 1 }}>{event.city}</span>
             <span style={{ flex: 1 }}>{event.venue}</span>
-            <a href={event.link || "#"} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline', flex: 1 }}>Tickets</a>
+            {event.link ? (
+              <a
+                href={/^(https?:)?\/\//.test(event.link) ? event.link : `https://${event.link}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#fff', textDecoration: 'underline', flex: 1 }}
+              >
+                Tickets
+              </a>
+            ) : (
+              <span style={{ flex: 1, color: '#888', textAlign: 'center' }}>—</span>
+            )}
             <button onClick={() => handleDelete(idx)} style={{ background: '#c00', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', fontWeight: 700, cursor: 'pointer' }}>Delete</button>
           </li>
         ))}

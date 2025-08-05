@@ -7,9 +7,10 @@ import Tour from './components/Tour';
 import Footer from './components/Footer';
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
+
 import CartOverlay from './components/CartOverlay';
 import { CartProvider } from './components/CartContext';
-
+import DepartmentCarousel from './components/DepartmentCarousel';
 import AdminDashboard from './components/Admin/AdminDashboard';
 
 function Home() {
@@ -56,6 +57,7 @@ function AppContent() {
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/department" element={<DepartmentCarousel />} />
         </Routes>
       </>
       <CartOverlay />

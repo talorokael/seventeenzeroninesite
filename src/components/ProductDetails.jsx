@@ -17,13 +17,15 @@ export default function ProductDetails() {
 
   return (
     <main className="center-img-wrap">
-      <img className="center-img" src={product.img} alt={product.title} />
-      <div style={{ textAlign: "center", marginTop: 32 }}>
-        <h2>{product.title}</h2>
-        <p style={{ fontSize: "1.2rem", color: "#ccc" }}>{product.price}</p>
-        <button className="buy-btn" onClick={() => addToCart(product)}>
-          BUY
-        </button>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <img className="center-img" src={product.img} alt={product.title} />
+        <div style={{ textAlign: "center", marginTop: 32, width: '100%' }}>
+          <h2>{product.title}</h2>
+          <p style={{ fontSize: "1.2rem", color: "#ccc" }}>{product.price}</p>
+          <button className="buy-btn" onClick={() => addToCart(product)}>
+            BUY
+          </button>
+        </div>
       </div>
     </main>
   );
