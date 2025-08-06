@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCart } from "./CartContext";
+import { payWithPaystack } from "../utils/paystack";
 
 export default function Checkout() {
   const { cart } = useCart();
@@ -24,8 +25,35 @@ export default function Checkout() {
 
   function handlePayNow(e) {
     e.preventDefault();
-    // Paystack integration would go here
-    alert("Paystack payment would be initiated here.");
+    // Use environment variable for your Paystack public key
+    const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || "pk_test_xxxxxxxxxxxxxxxxxxxxxxxx"; // Set VITE_PAYSTACK_PUBLIC_KEY in your .env file
+
+    if (!form.email || !form.phone || !form.firstName || !form.lastName) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    payWithPaystack({
+      email: form.email,
+      amount: subtotal,
+      publicKey,
+      currency: "ZAR", // South African Rand
+      metadata: {
+        custom_fields: [
+          { display_name: "Mobile Number", variable_name: "mobile_number", value: form.phone },
+          { display_name: "Name", variable_name: "customer_name", value: `${form.firstName} ${form.lastName}` },
+          { display_name: "Delivery Address", variable_name: "delivery_address", value: `${form.complex} ${form.street}, ${form.town}, ${form.city}, ${form.province}, ${form.zip}` }
+        ]
+      },
+      onSuccess: function(response) {
+        alert('Payment complete! Reference: ' + response.reference);
+        // TODO: For production, verify payment on your backend here using response.reference
+        // Optionally clear cart or redirect
+      },
+      onClose: function() {
+        alert('Payment window closed.');
+      }
+    });
   }
 
   return (
@@ -156,7 +184,7 @@ export default function Checkout() {
         </div>
         <div className="checkout-total-row">
           <span className="checkout-total-label">Total</span>
-          <span className="checkout-total-value">${subtotal.toFixed(2)}</span>
+          <span className="checkout-total-value">R{subtotal.toFixed(2)}</span>
         </div>
         <button className="checkout-pay-btn" type="submit">Pay Now</button>
       </form>

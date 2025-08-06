@@ -4,24 +4,24 @@ import React, { useRef, useState, useEffect } from "react";
 const carouselItems = [
   {
     video: "/src/assets/videos/For Da Money Official Music Video - 1709 Records (1080p, h264) (1).mp4",
-    image: "/src/assets/images/peep-disc.webp",
-    link: "https://example.com/1"
+    image: "/src/assets/images/peep-record.webp",
+    link: "https://www.youtube.com/watch?v=NnQb6yX8DdQ&list=RDNnQb6yX8DdQ&start_radio=1"
   },
   {
     video: "/src/assets/videos/ICE (OFFICIAL VIDEO) - 1709 Records (1080p, h264).mp4",
     image: "/src/assets/images/peep-disc.webp",
-    link: "https://example.com/2"
+    link: "https://www.youtube.com/watch?v=Prl0bO-QJ7g"
   },
   // Add more items as needed
   {
     video: "/src/assets/videos/No Regrets (Official Music Video) - 1709 Records (1080p, h264).mp4",
-    image: "/src/assets/images/peep-disc.webp",
-    link: "https://example.com/1"
+    image: "/src/assets/images/peep-tape.webp",
+    link: "https://www.youtube.com/watch?v=29N7s3DLcIc"
   },
   {
     video: "/src/assets/videos/NUMBA (OFFICIAL MUSIC VIDEO) - 1709 Records (1080p, h264).mp4",
-    image: "/src/assets/images/peep-disc.webp",
-    link: "https://example.com/2"
+    image: "/src/assets/images/bts-pc.jpg",
+    link: "https://www.youtube.com/watch?v=gBmKJZhcaPA"
   }
 ];
 
@@ -60,22 +60,41 @@ export default function DepartmentCarousel() {
 
   // Carousel navigation
   function goTo(idx) {
-    setCurrent((idx + carouselItems.length) % carouselItems.length);
+    setCurrent(prevIdx => {
+      let newIdx = idx;
+      // If idx is relative, adjust from prevIdx
+      if (typeof idx === 'function') newIdx = idx(prevIdx);
+      if (newIdx < 0) newIdx = carouselItems.length - 1;
+      if (newIdx >= carouselItems.length) newIdx = 0;
+      return newIdx;
+    });
   }
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
+  function next() { goTo(prevIdx => prevIdx + 1); }
+  function prev() { goTo(prevIdx => prevIdx - 1); }
 
-  // Trackpad/mouse horizontal scroll
+  // Trackpad/mouse horizontal scroll (debounced)
+  const scrollTimeout = useRef();
+  const scrolling = useRef(false);
   useEffect(() => {
     function onWheel(e) {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        if (e.deltaX > 0) next();
-        else if (e.deltaX < 0) prev();
+        if (!scrolling.current) {
+          if (e.deltaX > 0) next();
+          else if (e.deltaX < 0) prev();
+          scrolling.current = true;
+          clearTimeout(scrollTimeout.current);
+          scrollTimeout.current = setTimeout(() => {
+            scrolling.current = false;
+          }, 400); // 400ms debounce
+        }
       }
     }
     window.addEventListener("wheel", onWheel, { passive: false });
-    return () => window.removeEventListener("wheel", onWheel);
-  });
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      clearTimeout(scrollTimeout.current);
+    };
+  }, []);
 
   // Click and hold navigation
   function handleHold(dir) {

@@ -44,12 +44,13 @@ function AppContent() {
   const isProductPage = location.pathname.startsWith("/product");
   const isShopPage = location.pathname === "/shop";
   const isCheckoutPage = location.pathname === "/checkout";
+  const isAdminPage = location.pathname === "/admin";
 
   return (
     <CartProvider>
       <>
-        {!isProductPage && !isShopPage && !isCheckoutPage && <OverlayNav />}
-        {!isProductPage && !isCheckoutPage && <Header />}
+        {!isProductPage && !isShopPage && !isCheckoutPage && !isAdminPage && <OverlayNav />}
+        {!isProductPage && !isCheckoutPage && !isAdminPage && <Header />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />

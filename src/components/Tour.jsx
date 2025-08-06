@@ -34,7 +34,15 @@ export default function Tour() {
             <div>{event.city}</div>
             <div>{event.venue}</div>
             <div>
-              <a href={event.link} target="_blank" rel="noopener noreferrer">
+              <a
+                href={
+                  /^https?:\/\//i.test(event.link?.trim())
+                    ? event.link.trim()
+                    : "https://" + (event.link?.trim() || "").replace(/^\/+/, "")
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Buy
               </a>
             </div>

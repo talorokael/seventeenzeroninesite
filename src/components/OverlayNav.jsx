@@ -68,7 +68,7 @@ export default function OverlayNav() {
         <div className="links">
           <a href="/tour/" className="link-item">TOUR</a>
           <a href="/department" className="link-item">Department of Street Affairs</a>
-          <a href="/shop" className="link-item">Store</a>
+          <a href="/shop" className="link-item" target="_blank" rel="noopener noreferrer">SHOP</a>
           <a href="/explore/" className="link-item">Activist Mix Tape</a>
         </div>
         <div className="actions">

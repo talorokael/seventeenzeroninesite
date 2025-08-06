@@ -14,7 +14,7 @@ export default function Header() {
       ) : (
         <Link to="/tour" className="header-btn tour">TOUR</Link>
       )}
-      <Link to="/shop" className="header-btn shop">SHOP</Link>
+      <a href="/shop" className="header-btn shop" target="_blank" rel="noopener noreferrer">SHOP</a>
     </>
   );
 }

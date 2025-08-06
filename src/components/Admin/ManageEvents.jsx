@@ -53,7 +53,11 @@ export default function ManageEvents() {
             <span style={{ flex: 1 }}>{event.venue}</span>
             {event.link ? (
               <a
-                href={/^(https?:)?\/\//.test(event.link) ? event.link : `https://${event.link}`}
+                href={(() => {
+                  const trimmed = event.link.trim();
+                  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+                  return 'https://' + trimmed.replace(/^\/+/, '');
+                })()}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#fff', textDecoration: 'underline', flex: 1 }}
