@@ -4,23 +4,23 @@ import React, { useRef, useState, useEffect } from "react";
 const carouselItems = [
   {
     video: "/src/assets/videos/For Da Money Official Music Video - 1709 Records (1080p, h264) (1).mp4",
-    image: "/src/assets/images/peep-record.webp",
+    image: "/src/assets/images/4damoney.jpg",
     link: "https://www.youtube.com/watch?v=NnQb6yX8DdQ&list=RDNnQb6yX8DdQ&start_radio=1"
   },
   {
     video: "/src/assets/videos/ICE (OFFICIAL VIDEO) - 1709 Records (1080p, h264).mp4",
-    image: "/src/assets/images/peep-disc.webp",
+    image: "/src/assets/images/ice.jpg",
     link: "https://www.youtube.com/watch?v=Prl0bO-QJ7g"
   },
   // Add more items as needed
   {
     video: "/src/assets/videos/No Regrets (Official Music Video) - 1709 Records (1080p, h264).mp4",
-    image: "/src/assets/images/peep-tape.webp",
+    image: "/src/assets/images/noregrets.jpg",
     link: "https://www.youtube.com/watch?v=29N7s3DLcIc"
   },
   {
     video: "/src/assets/videos/NUMBA (OFFICIAL MUSIC VIDEO) - 1709 Records (1080p, h264).mp4",
-    image: "/src/assets/images/bts-pc.jpg",
+    image: "/src/assets/images/numba.jpg",
     link: "https://www.youtube.com/watch?v=gBmKJZhcaPA"
   }
 ];

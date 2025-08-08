@@ -25,19 +25,16 @@ export default function Checkout() {
 
   function handlePayNow(e) {
     e.preventDefault();
-    // Use environment variable for your Paystack public key
-    const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || "pk_test_xxxxxxxxxxxxxxxxxxxxxxxx"; // Set VITE_PAYSTACK_PUBLIC_KEY in your .env file
-
+    const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || "pk_test_xxxxxxxxxxxxxxxxxxxxxxxx";
     if (!form.email || !form.phone || !form.firstName || !form.lastName) {
       alert("Please fill in all required fields.");
       return;
     }
-
     payWithPaystack({
       email: form.email,
       amount: subtotal,
       publicKey,
-      currency: "ZAR", // South African Rand
+      currency: "ZAR",
       metadata: {
         custom_fields: [
           { display_name: "Mobile Number", variable_name: "mobile_number", value: form.phone },
@@ -46,9 +43,42 @@ export default function Checkout() {
         ]
       },
       onSuccess: function(response) {
-        alert('Payment complete! Reference: ' + response.reference);
-        // TODO: For production, verify payment on your backend here using response.reference
-        // Optionally clear cart or redirect
+        // Send order to backend after payment success
+        fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: form.email,
+            name: `${form.firstName} ${form.lastName}`,
+            phone: form.phone,
+            address: {
+              complex: form.complex,
+              street: form.street,
+              town: form.town,
+              city: form.city,
+              province: form.province,
+              zip: form.zip
+            },
+            items: cart,
+            total: subtotal,
+            payment_reference: response.reference
+          })
+        })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log('Order saved successfully:', data);
+          alert('Order placed! Reference: ' + response.reference);
+          // Optionally clear cart or redirect
+        })
+        .catch((error) => {
+          console.error('Error saving order:', error);
+          alert('Order could not be saved, but payment was successful. Please contact support.');
+        });
       },
       onClose: function() {
         alert('Payment window closed.');
