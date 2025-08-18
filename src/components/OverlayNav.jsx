@@ -54,7 +54,14 @@ export default function OverlayNav() {
         onClick={() => setOpen((v) => !v)}
         type="button"
       >
-        <span className="icon menu">&#9776;</span>
+        {/* Logo instead of ☰ */}
+  <span className="icon menu">
+    <img 
+      src="/src/assets/images/1709logo2.jpg" 
+      alt="Menu Logo" 
+      className="nav-logo" 
+    />
+  </span>
         <span className="icon close">&#10005;</span>
       </button>
 
@@ -64,7 +71,9 @@ export default function OverlayNav() {
         ref={overlayRef}
         onClick={handleOverlayClick}
       >
-        <img src="/utopia-logo.svg" alt="Utopia Logo" className="logo-animate" />
+        <a href="/">
+          <img src="/src/assets/images/1709logo.jpg" alt="Utopia Logo" className="logo-animate" />
+        </a>
         <div className="links">
           <a href="/tour/" className="link-item">TOUR</a>
           <a href="/department" className="link-item">Department of Street Affairs</a>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Montserrat:wght@200;300;400&display=swap');
+
 /* Checkout Page Styles */
 .checkout-container {
   max-width: 600px;
@@ -13,7 +15,7 @@
 }
 .checkout-heading {
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 300;
   margin: 32px 0 18px 0;
   letter-spacing: 0.04em;
   text-transform: none;
@@ -117,13 +119,13 @@
 }
 .checkout-item-name {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 300;
   color: var(--white);
   margin-right: auto;
 }
 .checkout-item-price {
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 300;
   color: #fff;
   margin-left: 0;
 }
@@ -133,15 +135,15 @@
   justify-content: space-between;
   margin: 28px 0 0 0;
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 300;
 }
 .checkout-total-label {
-  font-weight: 800;
+  font-weight: 300;
   color: var(--white);
 }
 .checkout-total-value {
   color: #fff;
-  font-weight: 800;
+  font-weight: 300;
   font-size: 1.15rem;
 }
 .checkout-pay-btn {
@@ -150,7 +152,7 @@
   border: none;
   border-radius: 32px;
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 300;
   padding: 14px 0;
   width: 100%;
   cursor: pointer;
@@ -220,11 +222,11 @@
 .cart-qty {
   min-width: 32px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 300;
   color: #ccc;
 }
 .cart-price {
-  font-weight: 700;
+  font-weight: 300;
   color: #fff;
   margin-left: auto;
 }
@@ -242,7 +244,7 @@
 }
 .cart-subtotal {
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 300;
   color: #fff;
   margin-bottom: 16px;
 }
@@ -252,7 +254,7 @@
   border: none;
   border-radius: 32px;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 300;
   padding: 12px 0;
   width: 90%;
   cursor: pointer;
@@ -314,7 +316,7 @@
 .footer-legal a {
   color: var(--white);
   text-decoration: underline;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05em;
   transition: color 0.2s;
@@ -343,6 +345,7 @@ html, body {
   background: var(--black);
   color: var(--white);
   font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 300;
   box-sizing: border-box;
   overflow-x: hidden;
 }
@@ -354,7 +357,7 @@ a, button {
   color: var(--white);
   text-decoration: none;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 300;
   letter-spacing: 0.05em;
   transition: opacity 0.2s;
   cursor: pointer;
@@ -437,6 +440,59 @@ a:hover, button:hover {
 .nav-toggle.active .icon.close {
   display: block;
 }
+
+/* Nav Toggle Button */
+.nav-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px; /* Adjust based on logo size */
+  height: 60px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Logo inside the button */
+.nav-toggle .icon.menu img.nav-logo {
+  width: 100%; /* Logo fills button */
+  height: auto;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Close (X) icon */
+.nav-toggle .icon.close {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  transform: rotate(0deg);
+  transition: opacity 0.3s, transform 0.3s;
+  color: white;
+}
+
+/* When overlay is open: Hide logo, show X */
+.nav-toggle.active .icon.menu img.nav-logo {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.nav-toggle.active .icon.close {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.nav-toggle:hover .icon.menu img.nav-logo {
+  transform: scale(1.1);
+}
+.nav-toggle.active:hover .icon.close {
+  transform: rotate(180deg) scale(1.1);
+}
+
 /* Overlay */
 .overlay {
   position: fixed;
@@ -457,7 +513,7 @@ a:hover, button:hover {
 }
 /* Overlay Animations */
 .overlay .logo-animate {
-  width: 180px;
+  width: 60px;
   margin: 0 auto 32px auto;
   opacity: 0;
   transform: translateY(-20px);
@@ -635,7 +691,7 @@ a:hover, button:hover {
   grid-template-columns: 1.2fr 1fr 2fr 1fr;
   color: #ccc;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 300;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   border-bottom: 2px solid #444;
@@ -652,12 +708,13 @@ a:hover, button:hover {
   border-bottom: 1px solid #222;
   padding: 16px 0;
   margin-bottom: 0;
+  font-weight: 300;
 }
 
 .tour-table-row a {
   color: var(--white);
   text-decoration: underline;
-  font-weight: 700;
+  font-weight: 300;
   transition: color 0.2s;
 }
 

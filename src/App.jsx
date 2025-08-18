@@ -16,7 +16,9 @@ import AdminDashboard from './components/Admin/AdminDashboard';
 function Home() {
   return (
     <main className="center-img-wrap">
-      <img className="center-img" alt="JACKBOYS2" src="https://cdn.sanity.io/images/vfp8z5al/production/da175aa954df2392a9b17220db9780979cc893d1-1000x1000.jpg?q=75&fit=clip&auto=format" />
+      <a href="/shop">
+      <img className="center-img" alt="1709hero" src="/src/assets/images/1709hero.jpg" />
+      </a>
     </main>
   );
 }
@@ -24,16 +26,36 @@ function Home() {
 function Shop() {
   return (
     <main>
-      <h1 style={{ textAlign: 'center', marginTop: 40 }}>Shop</h1>
+      <a href="/">
+      <img 
+        src="/src/assets/images/1709logo.jpg" 
+        alt="Shop" 
+        style={{ 
+          display: 'block', 
+          margin: '40px auto 0', 
+          maxWidth: '200px' // adjust size if needed
+        }} 
+      />
+      </a>
       <ProductGrid />
       <Footer />
     </main>
   );
 }
 
+
 function TourPage(){
   return(
     <main>
+      <img 
+        src="/src/assets/images/1709logo.jpg" 
+        alt="Shop" 
+        style={{ 
+          display: 'block', 
+          margin: '40px auto 0', 
+          maxWidth: '200px' // adjust size if needed
+        }} 
+      />
       <Tour />
     </main>
   )

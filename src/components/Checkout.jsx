@@ -95,7 +95,7 @@ export default function Checkout() {
           <input
             type="email"
             name="email"
-            placeholder="customer email"
+            placeholder="Customer Email"
             className="checkout-input"
             value={form.email}
             onChange={handleChange}
@@ -104,7 +104,7 @@ export default function Checkout() {
           <input
             type="tel"
             name="phone"
-            placeholder="phone"
+            placeholder="Phone"
             className="checkout-input"
             value={form.phone}
             onChange={handleChange}
@@ -114,7 +114,7 @@ export default function Checkout() {
             <input
               type="text"
               name="firstName"
-              placeholder="first name"
+              placeholder="First Name"
               className="checkout-input half"
               value={form.firstName}
               onChange={handleChange}
@@ -123,7 +123,7 @@ export default function Checkout() {
             <input
               type="text"
               name="lastName"
-              placeholder="last name"
+              placeholder="Last Name"
               className="checkout-input half"
               value={form.lastName}
               onChange={handleChange}
@@ -139,7 +139,7 @@ export default function Checkout() {
             <input
               type="text"
               name="complex"
-              placeholder="complex/flat number and name (optional)"
+              placeholder="Complex/Flat Number And Name (Optional)"
               className="checkout-input"
               value={form.complex}
               onChange={handleChange}
@@ -147,7 +147,7 @@ export default function Checkout() {
             <input
               type="text"
               name="street"
-              placeholder="street address"
+              placeholder="Street Address"
               className="checkout-input"
               value={form.street}
               onChange={handleChange}
@@ -158,7 +158,7 @@ export default function Checkout() {
             <input
               type="text"
               name="town"
-              placeholder="town"
+              placeholder="Town"
               className="checkout-input quarter"
               value={form.town}
               onChange={handleChange}
@@ -167,7 +167,7 @@ export default function Checkout() {
             <input
               type="text"
               name="city"
-              placeholder="city"
+              placeholder="City"
               className="checkout-input quarter"
               value={form.city}
               onChange={handleChange}
@@ -176,7 +176,7 @@ export default function Checkout() {
             <input
               type="text"
               name="province"
-              placeholder="province"
+              placeholder="Province"
               className="checkout-input quarter"
               value={form.province}
               onChange={handleChange}
@@ -185,7 +185,7 @@ export default function Checkout() {
             <input
               type="text"
               name="zip"
-              placeholder="zip code"
+              placeholder="Zip Code"
               className="checkout-input quarter"
               value={form.zip}
               onChange={handleChange}
